@@ -16,8 +16,6 @@ if (process.env.type === 'test')
     data.database = process.env.POSTGRES_DB_TEST
 }
 
-console.warn(data);
-
 const connector = new Pool({
     host: data.host,
     database: data.database,
@@ -26,3 +24,5 @@ const connector = new Pool({
 })
 
 export {connector}
+export const pepper = process.env.pepper
+export const rounds = process.env.SALT_ROUNDS

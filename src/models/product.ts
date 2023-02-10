@@ -68,6 +68,7 @@ export class store_product
             const conn = connector.connect();
             const result = (await conn).query("DELETE FROM product WHERE id = $1",[id]);
 
+            (await conn).release();
             return true;
         }
         catch (err)
@@ -84,6 +85,7 @@ export class store_product
             const conn = connector.connect();
             const result = (await conn).query("UPDATE product SET pname = $2 , cost = $3 WHERE id = $1",[pro.id,pro.pname,pro.cost]);
 
+            (await conn).release();
             return true;
         }
         catch (err)
@@ -100,6 +102,7 @@ export class store_product
             const conn = connector.connect();
             const result = (await conn).query("SELECT id FROM product WHERE id = $1",[id]);
 
+            (await conn).release();
             return (await result).rowCount > 0
         }
         catch (err)
