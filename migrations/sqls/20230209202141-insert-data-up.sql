@@ -1,0 +1,1 @@
+INSERT INTO product (pName,cost) VALUES ('Ball', 100),('Game',20),('Toy',50),('Sheet',15);
