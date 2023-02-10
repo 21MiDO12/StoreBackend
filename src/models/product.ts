@@ -2,14 +2,14 @@ import { connector } from "../modules/database";
 
 export type product =
 {
-    id : Number;
+    id? : Number;
     pname : string;
-    cost : Number;
+    cost? : Number;
 }
 
 export class store_product
 {
-    async index (): Promise<product[]>
+    static async index (): Promise<product[]>
     {
         try
         {
@@ -26,7 +26,7 @@ export class store_product
         }
     }
 
-    async show (id:Number): Promise<product>
+    static async show (id:Number): Promise<product>
     {
         try
         {
@@ -43,7 +43,7 @@ export class store_product
         }
     }
 
-    async insert (pro:product): Promise<boolean>
+    static async insert (pro:product): Promise<boolean>
     {
         try
         {
@@ -60,7 +60,7 @@ export class store_product
         }
     }
 
-    async delete (id:Number): Promise<boolean>
+    static async delete (id:Number): Promise<boolean>
     {
         try
         {
@@ -77,7 +77,7 @@ export class store_product
         }
     }
 
-    async update(pro:product): Promise<boolean>
+    static async update(pro:product): Promise<boolean>
     {
         try
         {
@@ -89,6 +89,23 @@ export class store_product
         catch (err)
         {
             console.error(`Can't Update ${pro.id} because of ${err}`);
+            return false;
+        }
+    }
+
+    static async checkID(id: Number): Promise<boolean>
+    {
+        try
+        {
+            const conn = connector.connect();
+            const result = (await conn).query("SELECT id FROM product WHERE id = $1",[id]);
+
+            return (await result).rowCount > 0
+        }
+        catch (err)
+        {
+
+            console.error(err);
             return false;
         }
     }

@@ -4,17 +4,19 @@ import {Pool} from "pg"
 dotenv.config()
 
 var data = {
-    host: process.env.host,
-    database: process.env.databaseTest,
-    user: process.env.user,
-    password: process.env.password
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DB,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD
 }
 
 
 if (process.env.type === 'test')
 {
-    data.database = process.env.database
+    data.database = process.env.POSTGRES_DB_TEST
 }
+
+console.warn(data);
 
 const connector = new Pool({
     host: data.host,
