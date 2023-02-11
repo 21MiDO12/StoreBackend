@@ -8,6 +8,7 @@
 - run the migrations.
 - create new user and password.
 - the backend port 1234.
+- database port number 5432
 - use the login user to get login token.
 - use the login token in token query in every CRUD api.
 
